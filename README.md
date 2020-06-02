@@ -1,2 +1,1 @@
-# KB
-Knowledge Base
+# Knowledge Base
