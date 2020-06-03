@@ -10,12 +10,13 @@
 在没有手动修改__proto__属性的指向时，以上三条便是JavaScript默认原型链指向逻辑。
 
 
-Object本身是一个函数，可以当作工具方法使用，将任意值转为对象。这个方法常用于保证某个值一定是对象。
-
---如果参数为空（或者为undefined和null），Object()返回一个空对象。例如 var obj = Object();，返回的就是{}对象
---var obj = new Object(); 可以当作构造函数使用，直接生成新对象。
-
-比如说用法，Object(value)与new Object(value)两者的语义是不同的，Object(value)表示将value转成一个对象，new Object(value)则表示新生成一个对象，它的值是value。
+> :notebook: Object本身是一个函数，可以当作工具方法使用，将任意值转为对象。这个方法常用于保证某个值一定是对象。
+> 
+> 如果参数为空（或者为undefined和null），Object()返回一个空对象。
+> 例如 `var obj = Object();`，返回的就是{}对象,  
+> `var obj = new Object();` 可以当作构造函数使用，直接生成新对象。
+> 
+> 比如说用法，Object(value)与new Object(value)两者的语义是不同的，Object(value)表示将value转成一个对象，new Object(value)则表示新生成一个对象，它的值是value。
 
 
 ```javascript
