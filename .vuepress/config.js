@@ -1,7 +1,7 @@
 module.exports = {
   title: "Knowledge Base",
   description: 'blog kb knowledge-base wiki',
-  dest: 'public',
+  // dest: 'public', //default build path is ".vuepress/dist/"
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
