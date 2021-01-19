@@ -17,7 +17,7 @@ module.exports = {
       //     { text: 'vuepress-reco', link: '/docs/theme-reco/' }
       //   ]
       // },
-      { text: 'Contact', 
+      { text: '联系', 
         icon: 'reco-message',
         items: [
           { text: 'GitHub', link: 'https://github.com/gerryge', icon: 'reco-github' }
@@ -56,6 +56,12 @@ module.exports = {
         desc: 'A simple and beautiful vuepress Blog & Doc theme.',
         avatar: "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
         link: 'https://vuepress-theme-reco.recoluan.com'
+      },
+      {
+        title: 'dyabp',
+        desc: 'Empowering Your Abp Development',
+        avatar: "https://dyabp.github.io/logo.png",
+        link: 'https://dyabp.github.io'
       },
     ],
     logo: '/logo.png',
