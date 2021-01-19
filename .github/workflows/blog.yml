@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  docs:
+  blogs:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.2.0
         with:
-          repo: gerryge/gerryge.github.io
+          repo: GerryGe/gerryge.github.io
           target_branch: main
           build_dir: .vuepress/dist
         env:
