@@ -44,7 +44,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.2.0
         with:
-          repo: GerryGe/gerryge.github.io
+          repo: gerryge/gerryge.github.io
           target_branch: main
           build_dir: .vuepress/dist
         env:
