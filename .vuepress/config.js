@@ -95,9 +95,9 @@ module.exports = {
      */
 
     valineconfig: {
-      // appId: '',//# your leancloud application appid
-      // appKey: '',//# your leancloud application appkey
-      // showComment: true,
+      appId: 'bHmo0i902HKNBRJawFHbQanC-gzGzoHsz',//# your leancloud application appid
+      appKey: '7BhtmrN68Mwi7tpI0AgGVSCD',//# your leancloud application appkey
+      //showComment: true,
       // notify: false # mail notifier , https://github.com/xCss/Valine/wiki
       // verify: false # Verification code
       // placeholder: Just go go # comment box placeholder
@@ -106,14 +106,6 @@ module.exports = {
       // pageSize: 10 # pagination size
       // visitor: false # Article reading statistic https://valine.js.org/visitor.html
     },
-
-    vssueConfig: {
-      platform: 'github',
-      owner: 'gerryge',
-      repo: 'gerryge.github.io',
-      clientId: 'fb78238aa7043b55e4aa',
-      clientSecret: 'e4e5fb004bd2e1ee8f9ca925e97662e6d02e11e9',
-    }
   },
   markdown: {
     lineNumbers: true
