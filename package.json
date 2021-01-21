@@ -9,5 +9,8 @@
   "devDependencies": {
     "vuepress": "1.7.1",
     "vuepress-theme-reco": "1.6.1"
+  },
+  "dependencies": {
+    "vuepress-plugin-comment": "^0.7.3"
   }
 }

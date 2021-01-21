@@ -1,3 +1,5 @@
+// const comment = require('./plugins/comment');
+
 module.exports = {
   title: "Knowledge Base",
   description: 'blog kb knowledge-base wiki',
@@ -9,15 +11,16 @@ module.exports = {
   theme: 'reco',
   themeConfig: {
     nav: [
-      { text: '首页', link: '/', icon: 'reco-home' },
-      { text: '时间轴', link: '/timeline/', icon: 'reco-date' },
+      { text: 'Home', link: '/', icon: 'reco-home' },
+      { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
       // { text: 'Docs', 
       //   icon: 'reco-message',
       //   items: [
       //     { text: 'vuepress-reco', link: '/docs/theme-reco/' }
       //   ]
       // },
-      { text: '联系', 
+      {
+        text: 'Contact',
         icon: 'reco-message',
         items: [
           { text: 'GitHub', link: 'https://github.com/gerryge', icon: 'reco-github' }
@@ -31,17 +34,17 @@ module.exports = {
         'plugin',
         'api'
       ]
-    },  
+    },
     type: 'blog',
     // 博客设置
     blogConfig: {
       category: {
         location: 2, // 在导航栏菜单中所占的位置，默认2
-        text: '分类' // 默认 “Category”
+        text: 'Category' // 默认 “分类”
       },
       tag: {
         location: 3, // 在导航栏菜单中所占的位置，默认3
-        text: '标签' // 默认 “Tag”
+        text: 'Tag' // 默认 “标签”
       }
     },
     friendLink: [
@@ -56,7 +59,7 @@ module.exports = {
         desc: 'A simple and beautiful vuepress Blog & Doc theme.',
         avatar: "https://vuepress-theme-reco.recoluan.com/icon_vuepress_reco.png",
         link: 'https://vuepress-theme-reco.recoluan.com'
-      },     
+      },
     ],
     logo: '/logo.png',
     // 搜索设置
@@ -76,7 +79,7 @@ module.exports = {
     cyberSecurityRecord: '苏公网安备 32059002002321号',
     cyberSecurityLink: 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32059002002321',
     // 项目开始时间
-    startYear: '2017'
+    startYear: '2017',
     /**
      * 密钥 (if your blog is private)
      */
@@ -88,15 +91,34 @@ module.exports = {
     // },
 
     /**
-     * valine 设置 (if you need valine comment )
+     * valine 设置 (if you need valine comment https://valine.js.org)
      */
 
-    // valineConfig: {
-    //   appId: '...',// your appId
-    //   appKey: '...', // your appKey
-    // }
+    valineconfig: {
+      // appId: '',//# your leancloud application appid
+      // appKey: '',//# your leancloud application appkey
+      // showComment: true,
+      // notify: false # mail notifier , https://github.com/xCss/Valine/wiki
+      // verify: false # Verification code
+      // placeholder: Just go go # comment box placeholder
+      // avatar: mm # gravatar style
+      // meta: nick,mail,link # custom comment header
+      // pageSize: 10 # pagination size
+      // visitor: false # Article reading statistic https://valine.js.org/visitor.html
+    },
+
+    vssueConfig: {
+      platform: 'github',
+      owner: 'gerryge',
+      repo: 'gerryge.github.io',
+      clientId: 'fb78238aa7043b55e4aa',
+      clientSecret: 'e4e5fb004bd2e1ee8f9ca925e97662e6d02e11e9',
+    }
   },
   markdown: {
     lineNumbers: true
-  }
+  },
+  // plugins: [
+  //   comment,
+  // ],
 }  
