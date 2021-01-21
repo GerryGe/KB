@@ -98,7 +98,7 @@ module.exports = {
       appId: 'bHmo0i902HKNBRJawFHbQanC-gzGzoHsz',
       appKey: '7BhtmrN68Mwi7tpI0AgGVSCD',
       //showComment: true,
-      placeholder: 'Just go go.', //# comment box placeholder
+      placeholder: 'To leave a comment. Styling with Markdown is supported.', //# comment box placeholder
       avatar: 'robohash', // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
       // meta: nick,mail,link # custom comment header
       // pageSize: 10 # pagination size
