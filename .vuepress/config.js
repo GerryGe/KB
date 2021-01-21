@@ -94,17 +94,17 @@ module.exports = {
      * valine 设置 (if you need valine comment https://valine.js.org)
      */
 
-    valineconfig: {
-      appId: 'bHmo0i902HKNBRJawFHbQanC-gzGzoHsz',//# your leancloud application appid
-      appKey: '7BhtmrN68Mwi7tpI0AgGVSCD',//# your leancloud application appkey
+    valineConfig: {
+      appId: 'bHmo0i902HKNBRJawFHbQanC-gzGzoHsz',
+      appKey: '7BhtmrN68Mwi7tpI0AgGVSCD',
       //showComment: true,
-      // notify: false # mail notifier , https://github.com/xCss/Valine/wiki
-      // verify: false # Verification code
-      // placeholder: Just go go # comment box placeholder
-      // avatar: mm # gravatar style
+      placeholder: 'Just go go.', //# comment box placeholder
+      avatar: 'robohash', // (''/mp/identicon/monsterid/wavatar/robohash/retro/hide)
       // meta: nick,mail,link # custom comment header
       // pageSize: 10 # pagination size
-      // visitor: false # Article reading statistic https://valine.js.org/visitor.html
+      lang: 'zh-CN', //zh-CN,en
+      visitor: true, //# Article reading statistic https://valine.js.org/visitor.html
+
     },
   },
   markdown: {
