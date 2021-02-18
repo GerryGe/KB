@@ -1,7 +1,7 @@
 ---
 home: true
 heroText: Knowledge Base
-tagline: 知识分享
+tagline:  Knowledge Sharing
 # heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
