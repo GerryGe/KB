@@ -2,7 +2,7 @@
 
 module.exports = {
   title: "Knowledge Base",
-  description: 'blog kb knowledge-base wiki',
+  description: '知识分享',
   // dest: 'public', //default build path is ".vuepress/dist/"
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -11,7 +11,7 @@ module.exports = {
   theme: 'reco',
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/', icon: 'reco-home' },
+      { text: '主页', link: '/', icon: 'reco-home' },
       { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
       // { text: 'Docs', 
       //   icon: 'reco-message',

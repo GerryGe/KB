@@ -2,9 +2,9 @@
 title: C# Async 反模式
 date: 2021-03-29
 tags:
- - CSharp
+ - C#
 categories:
- - CSharp
+ - .NET
 sidebar: 'auto'
 sticky: 1
 author: gerryge
