@@ -1,5 +1,5 @@
 ---
-title: C# Async Antipatterns
+title: C# Async 反模式
 date: 2021-03-29
 tags:
  - CSharp
@@ -10,7 +10,6 @@ sticky: 1
 author: gerryge
 ---
 
-# C# Async 反模式
 
 `async`和`await`这两个关键字在简化用C＃编写异步代码方面做得很好，但是不幸的是，它们不能神奇地保护您免于出错。
 
