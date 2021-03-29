@@ -1,10 +1,8 @@
 ---
 home: true
-heroImage: /logo.png
 heroText: Knowledge Base
 tagline: 知识分享
-sidebar: false
-# bgImage: '/bg.png'
+# heroImage: /hero.png
 # heroImageStyle: {
 #   maxWidth: '600px',
 #   width: '100%',
@@ -14,14 +12,13 @@ sidebar: false
 #   borderRadius: '1rem',
 # }
 # isShowTitleInHome: false
-actionText: Get Started →
-actionLink: /blogs/
+actionText: Guide
+actionLink: /blogs/other/guide
 features:
-- title: Simplicity First
-  details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Vue-Powered
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
-footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: Yesterday
+  details: 开发一款看着开心、写着顺手的 vuepress 博客主题
+- title: Today
+  details: 希望帮助更多的人花更多的时间在内容创作上，而不是博客搭建上
+- title: Tomorrow
+  details: 希望更多的爱好者能够参与进来，帮助这个主题更好的成长
 ---

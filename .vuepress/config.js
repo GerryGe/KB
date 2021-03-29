@@ -36,8 +36,8 @@ module.exports = {
         algolia: {},
         nav: [
           { text: 'Home', link: '/', icon: 'reco-home' },
+          { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
           { text: 'Blogs', link: '/categories/abp/' },
-          { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },      
           {
             text: 'Contact',
             icon: 'reco-message',
@@ -57,8 +57,8 @@ module.exports = {
         editLinkText: '在 GitHub 上编辑此页',
         nav: [
           { text: '首页', link: '/', icon: 'reco-home' },
+          { text: '时间线', link: '/timeline/', icon: 'reco-date' },
           { text: '博客', link: '/categories/abp/' },
-          { text: '时间线', link: '/timeline/', icon: 'reco-date' },        
           {
             text: '联系',
             icon: 'reco-message',
@@ -75,9 +75,10 @@ module.exports = {
       }
     },
     sidebar: {
-      '/other/': [
-        '',     /* /other/ */
-        'guide'   /* /other/guide.html */
+      '/architecture/2021/': [
+        '',     /* /foo/ */
+        'abp',  /* /foo/one.html */
+        'ddd'   /* /foo/two.html */
       ],
 
       '/bar/': [
