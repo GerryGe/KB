@@ -1,101 +1,41 @@
+// const comment = require('./plugins/comment');
+
 module.exports = {
-  title: 'Knowledge Base',
-  description: '知识分享',
+  title: "Knowledge Base",
+  description: 'blog kb knowledge-base wiki',
   // dest: 'public', //default build path is ".vuepress/dist/"
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
   ],
   theme: 'reco',
-  locales: {
-    // 键名是该语言所属的子路径
-    // 作为特例，默认语言可以使用 '/' 作为其路径。
-    '/': {
-      lang: 'zh-CN',
-    },
-    '/en/': {
-      lang: 'en-US',
-    }
-  },
   themeConfig: {
-    type: 'blog',
-    logo: '/logo.png',
-    authorAvatar: '/avatar.png',
-    subSidebar: 'auto',
-    locales: {
-      '/en/': {
-        // text for the language dropdown
-        selectText: 'Languages',
-        // label for this locale in the language dropdown
-        label: 'English',
-        // Aria Label for locale in the dropdown
-        ariaLabel: 'Languages',
-        // text for the edit-on-github link
-        editLinkText: 'Edit this page on GitHub',
-        // algolia docsearch options for current locale
-        algolia: {},
-        nav: [
-          { text: 'Home', link: '/', icon: 'reco-home' },
-          { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
-          { text: 'Blogs', link: '/categories/abp/' },
-          {
-            text: 'Contact',
-            icon: 'reco-message',
-            items: [
-              { text: 'GitHub', link: 'https://github.com/gerryge', icon: 'reco-github' }
-            ]
-          }
-        ],
-        // sidebar: {
-        //   '/': [/* ... */],
-        //   '/nested/': [/* ... */]
-        // }
-      },
-      '/': {
-        selectText: '选择语言',
-        label: '简体中文',
-        editLinkText: '在 GitHub 上编辑此页',
-        nav: [
-          { text: '首页', link: '/', icon: 'reco-home' },
-          { text: '时间线', link: '/timeline/', icon: 'reco-date' },
-          { text: '博客', link: '/categories/abp/' },
-          {
-            text: '联系',
-            icon: 'reco-message',
-            items: [
-              { text: 'GitHub', link: 'https://github.com/gerryge', icon: 'reco-github' }
-            ]
-          }
-        ],
-        algolia: {},
-        // sidebar: {
-        //   '/zh/': [/* ... */],
-        //   '/zh/nested/': [/* ... */]
-        // }
+    nav: [
+      { text: 'Home', link: '/', icon: 'reco-home' },
+      { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
+      // { text: 'Docs', 
+      //   icon: 'reco-message',
+      //   items: [
+      //     { text: 'vuepress-reco', link: '/docs/theme-reco/' }
+      //   ]
+      // },
+      {
+        text: 'Contact',
+        icon: 'reco-message',
+        items: [
+          { text: 'GitHub', link: 'https://github.com/gerryge', icon: 'reco-github' }
+        ]
       }
-    },
+    ],
     sidebar: {
-      '/architecture/2021/': [
-        '',     /* /foo/ */
-        'abp',  /* /foo/one.html */
-        'ddd'   /* /foo/two.html */
-      ],
-
-      '/bar/': [
-        '',      /* /bar/ */
-        'three', /* /bar/three.html */
-        'four'   /* /bar/four.html */
-      ],
-
-      '/baz/': 'auto', /* automatically generate single-page sidebars */
-
-      // // fallback
-      // '/': [
-      //   '',        /* / */
-      //   'contact', /* /contact.html */
-      //   'about'    /* /about.html */
-      // ]
+      '/docs/theme-reco/': [
+        '',
+        'theme',
+        'plugin',
+        'api'
+      ]
     },
+    type: 'blog',
     // 博客设置
     blogConfig: {
       category: {
@@ -121,6 +61,7 @@ module.exports = {
         link: 'https://vuepress-theme-reco.recoluan.com'
       },
     ],
+    logo: '/logo.png',
     // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
@@ -138,7 +79,7 @@ module.exports = {
     cyberSecurityRecord: '苏公网安备 32059002002321号',
     cyberSecurityLink: 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32059002002321',
     // 项目开始时间
-    startYear: '2020',
+    startYear: '2017',
     /**
      * 密钥 (if your blog is private)
      */
@@ -169,31 +110,7 @@ module.exports = {
   markdown: {
     lineNumbers: true
   },
-  plugins: [
-    ['@vuepress-reco/vuepress-plugin-bulletin-popover', {
-      body: [
-        {
-          type: 'title',
-          content: '欢迎加入QQ交流群 🎉🎉🎉',
-          style: 'text-aligin: center;'
-        },
-        {
-          type: 'image',
-          src: '/qqgroup.png'
-        }
-      ],
-      footer: [
-        {
-          type: 'button',
-          text: '打赏',
-          link: '/donate'
-        },
-        {
-          type: 'button',
-          text: '打赏',
-          link: '/donate'
-        }
-      ]
-    }]
-  ],
+  // plugins: [
+  //   comment,
+  // ],
 }  
