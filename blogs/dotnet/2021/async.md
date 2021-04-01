@@ -393,6 +393,5 @@ public async Task SendUserLoggedInMessage(Guid userId)
 
 
 
-> 原文：# [C# Async Antipatterns](https://markheath.net/post/async-antipatterns)
-
+> 原文：[C# Async Antipatterns](https://markheath.net/post/async-antipatterns)
 
