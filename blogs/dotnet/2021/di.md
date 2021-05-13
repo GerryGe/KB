@@ -23,7 +23,7 @@ author: gerryge
 
 ## 基础
 
-#### 构造函数注入（Constructor Injection）
+### 构造函数注入（Constructor Injection）
 
 构造函数注入用于声明和获取服务对服务构造的依赖关系。
 
@@ -52,7 +52,7 @@ public class ProductService
 - 在服务构造函数中显式定义所需的依赖项。因此，如果没有依赖项，就无法构建服务。
 - 将注入的依赖项分配给只读字段/属性（以防止在方法内部意外为其分配另一个值）。
 
-#### 属性注入（Property Injection）
+### 属性注入（Property Injection）
 
 ASP.NET Core的[标准依赖项注入容器](https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection)不支持属性注入。但是[您可以使用](https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-5.0)另一个支持属性注入的容器。
 
