@@ -73,9 +73,9 @@ module.exports = {
     author: 'Gerry Ge',
     // 作者头像
     authorAvatar: '/avatar.png',
-    // 备案号
-    // record: 'ICP 备案文案',
-    // recordLink: 'ICP 备案指向链接',
+    // 备案
+    record: '苏ICP备18063100号-1',
+    recordLink: 'https://beian.miit.gov.cn/',
     cyberSecurityRecord: '苏公网安备 32059002002321号',
     cyberSecurityLink: 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32059002002321',
     // 项目开始时间
