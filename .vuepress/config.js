@@ -11,7 +11,7 @@ module.exports = {
   theme: 'reco',
   themeConfig: {
     nav: [
-      { text: '主页', link: '/', icon: 'reco-home' },
+      { text: 'Home', link: '/', icon: 'reco-home' },
       { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
       // { text: 'Docs', 
       //   icon: 'reco-message',
@@ -74,7 +74,7 @@ module.exports = {
     // 作者头像
     authorAvatar: '/avatar.png',
     // 备案
-    record: '苏ICP备18063100号-1',
+    record: '苏ICP备18063100号',
     recordLink: 'https://beian.miit.gov.cn/',
     cyberSecurityRecord: '苏公网安备 32059002002321号',
     cyberSecurityLink: 'http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32059002002321',
