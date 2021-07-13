@@ -17,9 +17,3 @@ bgImageStyle: {
 height: '450px'
 }
 ---
-
-<style>
-.description {
-  color: #127D09;
-}
-</style>
