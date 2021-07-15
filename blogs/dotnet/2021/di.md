@@ -2,12 +2,11 @@
 title: Asp.Net Core依赖注入最佳实践和秘诀
 date: 2021-04-10
 tags:
- - C#
+ - .NET
 categories:
  - .NET
 sidebar: 'auto'
 sticky: 1
-author: gerryge
 ---
 
 

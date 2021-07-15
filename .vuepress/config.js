@@ -72,7 +72,7 @@ module.exports = {
     // 最后更新时间
     lastUpdated: 'Last Updated',
     // 作者
-    author: 'Gerry Ge',
+    author: 'gerryge',
     // 作者头像
     authorAvatar: '/avatar.png',
     // 备案
