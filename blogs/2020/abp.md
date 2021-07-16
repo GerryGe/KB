@@ -12,3 +12,6 @@ categories:
 ![abp](/images/abp/abp.png)
 
 [DDD](./ddd.md)
+
+#### 引用非pubic目录下图片,必须以./开头
+![abp](./abp.assets/dyabp.png)
