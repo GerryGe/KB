@@ -68,7 +68,7 @@ ABP 框架还支持不同类型的 UI 框架，包括 [Angular](https://docs.abp
 
 
 ::: tip
-大多数时候，API 控制器只是应用程序服务的包装器，将它们暴露给远程客户端。由于 ABP 框架的[自动 API 控制器系统会](https://docs.abp.io/en/abp/latest/API/Auto-API-Controllers)自动配置您的应用程序服务并将其公开为 API 控制器，因此您通常不会在此项目中创建控制器。但是，启动解决方案包含它用于您需要手动创建 API 控制器的情况。
+大多数时候，API 控制器只是应用程序服务的包装器，将它们暴露给远程客户端。由于 ABP 框架的[自动 API 控制器系统](https://docs.abp.io/en/abp/latest/API/Auto-API-Controllers)会自动配置您的应用程序服务并将其公开为 API 控制器，因此您通常不会在此项目中创建控制器。但是，启动解决方案包含它用于您需要手动创建 API 控制器的情况。
 :::
 
 
