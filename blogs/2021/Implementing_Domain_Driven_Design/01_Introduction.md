@@ -8,9 +8,12 @@ categories:
  - .NET
 sidebar: 'auto'
 sticky: 1
+prev: false
+next: ./02_What_Is_DDD
 ---
-
+::: tip
 本系列文章，翻译至[Implementing Domain Driven Design](https://abp.io/books/implementing-domain-driven-design)
+:::
 <!-- more -->
 
 # 简介

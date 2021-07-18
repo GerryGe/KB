@@ -8,6 +8,8 @@ categories:
  - .NET
 sidebar: 'auto'
 sticky: 2
+prev: ./01_Introduction
+next: ./03_Implementation_The_Big_Picture
 ---
 
 本系列文章，翻译至[Implementing Domain Driven Design](https://abp.io/books/implementing-domain-driven-design)

@@ -13,6 +13,9 @@ module.exports = {
     mode: 'auto', // 默认 auto，auto 跟随系统，dark 暗色模式，light 亮色模式
     modePicker: true, // 默认 true，false 不显示模式调节按钮，true 则显示
     huawei: true,
+    nextLinks: true,// 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
+    prevLinks: true,// 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
+    subSidebar: 'auto',//在所有页面中启用自动生成子侧边栏，原 sidebar 仍然兼容
     nav: [
       { text: 'Home', link: '/', icon: 'reco-home' },
       { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
@@ -30,12 +33,12 @@ module.exports = {
         ]
       }
     ],
+    //https://vuepress.vuejs.org/theme/default-theme-config.html#sidebar
     sidebar: {
-      '/docs/theme-reco/': [
-        '',
-        'theme',
-        'plugin',
-        'api'
+      '/blogs/2021/Implementing_Domain_Driven_Design/': [
+        ['./01_Introduction','简介'],
+        ['./02_What_Is_DDD','DDD是什么'],
+        ['./03_Implementation_The_Big_Picture','实现：全景图']
       ]
     },
     type: 'blog',
