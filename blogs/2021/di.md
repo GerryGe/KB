@@ -6,7 +6,6 @@ tags:
 categories:
  - .NET
 sidebar: 'auto'
-sticky: 1
 ---
 
 
