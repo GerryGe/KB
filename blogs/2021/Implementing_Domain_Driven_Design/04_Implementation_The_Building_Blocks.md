@@ -5,7 +5,7 @@ tags:
  - ABP
  - DDD
 categories:
- - .NET
+ - DDD
 sidebar: 'auto'
 sticky: 4
 prev: ./03_Implementation_The_Big_Picture

@@ -5,7 +5,7 @@ tags:
  - ABP
  - DDD
 categories:
- - .NET
+ - DDD
 sidebar: 'auto'
 sticky: 1
 prev: false

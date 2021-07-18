@@ -5,7 +5,7 @@ tags:
  - ABP
  - DDD
 categories:
- - .NET
+ - DDD
 sidebar: 'auto'
 sticky: 7
 prev: ./06_Domain_Logic_Application_Logic

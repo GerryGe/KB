@@ -5,7 +5,7 @@ tags:
  - ABP
  - DDD
 categories:
- - .NET
+ - DDD
 sidebar: 'auto'
 sticky: 6
 prev: ./05_Example_User_Cases
