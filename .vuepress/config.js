@@ -36,9 +36,13 @@ module.exports = {
     //https://vuepress.vuejs.org/theme/default-theme-config.html#sidebar
     sidebar: {
       '/blogs/2021/Implementing_Domain_Driven_Design/': [
-        ['./01_Introduction', '简介'],
+        ['./01_Introduction', '引言'],
         ['./02_What_Is_DDD', 'DDD是什么'],
-        ['./03_Implementation_The_Big_Picture', '实现：全景图']
+        ['./03_Implementation_The_Big_Picture', '实现：全景图'],
+        ['./04_Implementation_The_Building_Blocks','实现：构建块'],
+        ['./05_Example_User_Cases','用例'],
+        ['./06_Domain_Logic_Application_Logic','领域逻辑与应用逻辑'],
+        ['./07_Reference_Books','引用书籍']
       ],
       //Multiple Sidebars
       '/bar/': [

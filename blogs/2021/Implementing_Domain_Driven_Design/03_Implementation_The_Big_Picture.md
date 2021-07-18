@@ -9,7 +9,7 @@ categories:
 sidebar: 'auto'
 sticky: 3
 prev: ./02_What_Is_DDD
-next: false
+next: ./04_Implementation_The_Building_Blocks
 ---
 
 本系列文章，翻译至[Implementing Domain Driven Design](https://abp.io/books/implementing-domain-driven-design)
