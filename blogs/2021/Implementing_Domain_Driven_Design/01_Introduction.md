@@ -10,6 +10,9 @@ sidebar: 'auto'
 sticky: 1
 ---
 
+本系列文章，翻译至[Implementing Domain Driven Design](https://abp.io/books/implementing-domain-driven-design)
+<!-- more -->
+
 # 简介
 
 这是实现领域驱动设计 (DDD) 的**实用指南**。虽然实现细节依赖于 ABP 框架基础设施，但核心概念、原则和模式适用于任何类型的解决方案，即使它不是 .NET 解决方案。

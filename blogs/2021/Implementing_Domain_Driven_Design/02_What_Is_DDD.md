@@ -10,6 +10,9 @@ sidebar: 'auto'
 sticky: 2
 ---
 
+本系列文章，翻译至[Implementing Domain Driven Design](https://abp.io/books/implementing-domain-driven-design)
+<!-- more -->
+
 # 领域驱动设计是什么
 
 领域驱动设计 (DDD) 是一种通过将实现连接到**不断发展的**模型来满足**复杂**需求的软件开发方法；
