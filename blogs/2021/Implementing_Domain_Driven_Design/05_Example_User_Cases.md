@@ -5,6 +5,7 @@ tags:
  - ABP
  - DDD
 categories:
+ - ABP
  - DDD
 sidebar: 'auto'
 sticky: 5
