@@ -39,7 +39,13 @@ module.exports = {
         ['./01_Introduction','简介'],
         ['./02_What_Is_DDD','DDD是什么'],
         ['./03_Implementation_The_Big_Picture','实现：全景图']
-      ]
+      ],
+      //Multiple Sidebars
+      '/bar/': [
+        '',      /* /bar/ */
+        'three', /* /bar/three.html */
+        'four'   /* /bar/four.html */
+      ],
     },
     type: 'blog',
     // 博客设置
