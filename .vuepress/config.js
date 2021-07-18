@@ -36,9 +36,9 @@ module.exports = {
     //https://vuepress.vuejs.org/theme/default-theme-config.html#sidebar
     sidebar: {
       '/blogs/2021/Implementing_Domain_Driven_Design/': [
-        ['./01_Introduction','简介'],
-        ['./02_What_Is_DDD','DDD是什么'],
-        ['./03_Implementation_The_Big_Picture','实现：全景图']
+        ['./01_Introduction', '简介'],
+        ['./02_What_Is_DDD', 'DDD是什么'],
+        ['./03_Implementation_The_Big_Picture', '实现：全景图']
       ],
       //Multiple Sidebars
       '/bar/': [
@@ -123,6 +123,33 @@ module.exports = {
     lineNumbers: true
   },
   plugins: [
-    "vuepress-plugin-flowchart"
+    "vuepress-plugin-flowchart",
+    ['@vuepress-reco/vuepress-plugin-bulletin-popover', {
+      width: '300px', // 默认 260px
+      title: '消息提示',
+      body: [
+        {
+          type: 'title',
+          content: '欢迎加入QQ交流群 🎉🎉🎉',
+          style: 'text-aligin: center;'
+        },
+        {
+          type: 'image',
+          src: '/qqgroup.png'
+        }
+      ],
+      footer: [
+        // {
+        //   type: 'button',
+        //   text: '打赏',
+        //   link: '/donate'
+        // },
+        // {
+        //   type: 'button',
+        //   text: '打赏',
+        //   link: '/donate'
+        // }
+      ]
+    }]
   ]
 }
