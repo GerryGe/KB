@@ -141,7 +141,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 仅通过 ID 引用其他聚合
+### 仅通过 ID 引用其他聚合
 
 第一条规则说一个聚合应该只通过它们的 Id 引用其他聚合。这意味着您不能将导航属性添加到其他聚合。
 
@@ -162,7 +162,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 对于 EF Core 和关系数据库
+### 对于 EF Core 和关系数据库
 
 在MongoDB中，自然不适合拥有这样的导航属性/集合。如果这样做，您会在源聚合的数据库集合中找到目标聚合对象的副本，因为它在保存时被序列化为 JSON。
 
@@ -170,7 +170,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 保持聚合小规模
+### 保持聚合小规模
 
 一个好的做法是保持聚合简单和小规模。这是因为聚合将作为单个单元加载和保存，并且读取/写入大对象存在性能问题。请参阅下面的示例：
 
@@ -195,7 +195,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 聚合根/实体上的主键
+### 聚合根/实体上的主键
 
 - 聚合根通常具有单个 `Id` 属性作为其标识符（Primark Key：PK）。我们更喜欢 `Guid` 作为聚合根实体的 PK（请参阅 [Guid 生成文档](https://docs.abp.io/en/abp/latest/Guid-Generation)以了解原因）。
 - 聚合中的实体（不是聚合根）可以使用复合主键
@@ -219,7 +219,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 聚合根/实体的构造函数
+### 聚合根/实体的构造函数
 
 构造函数位于实体生命周期开始的地方。设计良好的构造函数有一些责任：
 
@@ -248,7 +248,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 实体属性访问器和方法
+### 实体属性访问器和方法
 
 你可能觉得上面的例子很奇怪！例如，我们强制在构造函数中传递一个非空的 `Title`。但是，开发人员随后可以在没有任何控制的情况下将 `Title` 属性设置为 `null`。这是因为上面的示例代码只关注构造函数。
 
@@ -270,7 +270,7 @@ EF Core 具有**更改跟踪**功能。因此，您实际上不需要调用 `_is
 
 
 
-#### 实体中的业务逻辑和异常
+### 实体中的业务逻辑和异常
 
 当您在实体中实现验证和业务逻辑时，您经常需要管理异常情况。在这些情况下；
 
@@ -339,7 +339,418 @@ ABP 的[异常处理系统](https://docs.abp.io/en/abp/latest/Exception-Handling
 
 
 
-#### 在实体中需要外部服务的业务逻辑
+### 实体中的业务逻辑依赖外部服务
 
-///TODO
+当业务逻辑仅使用该实体的属性时，在实体方法中实现业务规则很简单。如果业务逻辑需要**查询数据库**或使用任何应该从[依赖注入](https://docs.abp.io/en/abp/latest/Dependency-Injection)系统解析的**外部服务**怎么办。记住;实体不能注入服务！
 
+有两种常见的方式来实现这样的业务逻辑：
+
+- 在实体方法上实现业务逻辑并**获取外部依赖项作为方法的参数**。
+- 创建**领域服务**。
+
+领域服务将在后面解释。但是，现在让我们看看它是如何在实体类中实现的。
+
+**示例：业务规则：不能同时为用户分配超过 3 个未解决的问题**
+
+```c#
+public class Issue : AggregateRoot<Guid>
+{
+    //...
+    public Guid? AssignedUserId { get; private set; }
+    public async Task AssignToAsync(AppUser user, IUserIssueService userIssueService)
+    {
+        var openIssueCount = await userIssueService.GetOpenIssueCountAsync(user.Id);
+
+        if (openIssueCount >= 3)
+        {
+            throw new BusinessException("IssueTracking:ConcurrentOpenIssueLimit");
+        }
+
+        AssignedUserId = user.Id;
+    }
+
+    public void CleanAssignment()
+    {
+        AssignedUserId = null;
+    }
+}
+```
+
+- `AssignedUserId` 属性设置器设为私有。因此，只能使用 `AssignToAsync` 和 `CleanAssignment` 方法更改它。
+- `AssignToAsync` 获取一个 `AppUser` 实体。实际上，它只使用 `user.Id`，因此您可以获得 `Guid` 值，例如 `userId`。但是，这种方式可以确保 `Guid` 值是现有用户的 `Id` 而不是随机的 `Guid` 值。
+- `IUserIssueService` 是一种任意服务，用于获取用户的未解决问题计数。代码部分（调用`AssignToAsync`）负责解析IUserIssueService 并传递到这里。
+- 如果业务规则不满足，`AssignToAsync` 会抛出异常。
+- 最后，如果一切正确，则设置 `AssignedUserId` 属性。
+
+
+
+当您想将问题分配给用户时，此方法完美地保证了应用业务逻辑。但是，它有一些问题；
+
+- 它使实体类依**赖于外部服务**这将使实体变得**复杂**。
+- 它让实体变得难以使用。使用实体的代码现在需要注入`IUserIssueService` 并传递给 `AssignToAsync` 方法。
+
+
+实现此业务逻辑的另一种方法是引入**领域服务**，稍后将对此进行解释。
+
+
+
+### 存储库
+
+[存储库](https://docs.abp.io/en/abp/latest/Repositories)是一个类似集合的接口，领域和应用层使用它来访问数据持久性系统（数据库）以读取和写入业务对象，通常是聚合。
+
+常见的存储库原则是；
+
+- 在**领域层定义一个存储库接口**（因为它将在领域和应用层中使用），**在基础设施层实现**（启动模板中*EntityFrameworkCore*项目）。
+- 不要在存储库中包含业务逻辑。
+- 存储库接口应该独立于**数据库提供者/ORM**。例如，不要从存储库方法返回 `DbSet`。 `DbSet` 是 EF Core 提供的对象。
+- **为聚合根创建存储库**，而不是为所有实体创建存储库。因为，应该通过聚合根访问子集合实体（聚合的）。
+
+
+
+**不要在存储库中包含领域逻辑**
+
+虽然这条规则一开始看起来很明显，但很容易将业务逻辑泄漏到存储库中。
+
+**示例：从存储库中获取非活动问题**
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Volo.Abp.Domain.Repositories;
+
+namespace IssueTracking.Issues
+{
+	public interface IIssueRepository : IRepository<Issue, Guid>
+    {
+    	Task<List<Issue>> GetInActiveIssuesAsync();
+    }
+}
+```
+
+`IIssueRepository` 通过添加 `GetInActiveIssuesAsync` 方法扩展了标准 `IRepository<...>` 接口。这个存储库与下面这样一个问题类一起工作：
+
+```c#
+public class Issue : AggregateRoot<Guid>, IHasCreationTime
+{
+    public bool IsClosed { get; private set; }
+    public Guid? AssignedUserId { get; private set; }
+    public DateTime CreationTime { get; private set; }
+    public DateTime? LastCommentTime { get; private set; }
+    //...
+}
+```
+
+（代码只显示了我们在这个例子中需要的属性）
+
+规则说存储库不应该知道业务规则。这里的问题是“**什么是非活动问题**？它是一个业务规则定义吗？”
+
+让我们看一下实现来理解它：
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using IssueTracking.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore;
+
+namespace IssueTracking.Issues
+{
+    public class EfCoreIssueRepository :
+        EfCoreRepository<IssueTrackingDbContext, Issue, Guid>,
+        IIssueRepository
+    {
+        public EfCoreIssueRepository(
+            IDbContextProvider<IssueTrackingDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+        }
+
+        public async Task<List<Issue>> GetInActiveIssuesAsync()
+        {
+            var daysAgo30 = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+
+            var dbSet = await GetDbSetAsync();
+            return await dbSet.Where(i =>
+
+                //Open
+                !i.IsClosed &&
+
+                //Assigned to nobody
+                i.AssignedUserId == null &&
+
+                //Created 30+ days ago
+                i.CreationTime < daysAgo30 &&
+
+                //No comment or the last comment was 30+ days ago
+                (i.LastCommentTime == null || i.LastCommentTime < daysAgo30)
+            ).ToListAsync();
+        }
+    }
+}
+```
+
+（使用 EF Core 进行实现。请参阅 [EF Core 集成文档](https://docs.abp.io/en/abp/latest/Entity-Framework-Core)以了解如何使用 EF Core 创建自定义存储库。）
+
+当我们检查 `GetInActiveIssuesAsync` 实现时，我们看到一个定义非活动问题的业务规则：问题应该是开放的，没有分配给任何人，在 30 天以前创建并且在过去 30 天内没有评论。
+
+这是隐藏在存储库方法中的业务规则的隐式定义。当我们需要重用这个业务逻辑时，就会出现问题。
+
+例如，假设我们要在 `Issue` 实体上添加一个 `bool IsInActive()` 方法。这样，当我们有一个问题实体时，我们可以检查活跃度。
+
+让我们看看实现：
+
+```c#
+public class Issue : AggregateRoot<Guid>, IHasCreationTime
+{
+    public bool IsClosed { get; private set; }
+    public Guid? AssignedUserId { get; private set; }
+    public DateTime CreationTime { get; private set; }
+    public DateTime? LastCommentTime { get; private set; }
+    //...
+
+    public bool IsInActive()
+    {
+        var daysAgo30 = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+        return
+            //Open
+            !IsClosed &&
+
+            //Assigned to nobody
+            AssignedUserId == null &&
+
+            //Created 30+ days ago
+            CreationTime < daysAgo30 &&
+
+            //No comment or the last comment was 30+ days ago
+            (LastCommentTime == null || LastCommentTime < daysAgo30);
+    }
+}
+```
+
+我们不得不复制/粘贴/修改代码。如果活跃度的定义发生变化怎么办？我们不应该忘记更新这两个地方。这是业务逻辑的重复，非常危险。
+
+这个问题的一个很好的解决方案是*规约模式*！
+
+
+
+### 规约
+
+[规约](https://docs.abp.io/en/abp/latest/Specifications)是一个**命名的**、**可重用的**、**可组合的**和**可测试**的类，用于根据业务规则过滤领域对象。
+
+ABP 框架提供了必要的基础设施来轻松创建规约类并在您的应用程序代码中使用它们。让我们将非活动问题过滤器实现为规约类：
+
+```c#
+using System;
+using System.Linq.Expressions;
+using Volo.Abp.Specifications;
+
+namespace IssueTracking.Issues
+{
+    public class InActiveIssueSpecification : Specification<Issue>
+    {
+        public override Expression<Func<Issue, bool>> ToExpression()
+        {
+            var daysAgo30 = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+            return i =>
+                //Open
+                !i.IsClosed &&
+
+                //Assigned to nobody
+                i.AssignedUserId == null &&
+
+                //Created 30+ days ago
+                i.CreationTime < daysAgo30 &&
+
+                //No comment or the last comment was 30+ days ago
+                (i.LastCommentTime == null || i.LastCommentTime < daysAgo30);
+        }
+    }
+}
+```
+
+`Specification<T>` 基类通过定义表达式简化了创建规约类的过程。仅仅从存储库中将表达式移到此处。
+
+现在，我们可以重用 `Issue` 实体和 `EfCoreIssueRepository` 类中的 `InActiveIssueSpecification`。
+
+
+
+**在实体中使用规约**
+
+规约类提供了一个 `IsSatisfiedBy` 方法，如果给定的对象（实体）满足规约，则该方法返回 `true`。
+
+```c#
+public class Issue : AggregateRoot<Guid>, IHasCreationTime
+{
+    public bool IsClosed { get; private set; }
+    public Guid? AssignedUserId { get; private set; }
+    public DateTime CreationTime { get; private set; }
+    public DateTime? LastCommentTime { get; private set; }
+    //...
+
+    public bool IsInActive()
+    {
+        return new InActiveIssueSpecification().IsSatisfiedBy(this);
+    }
+}
+```
+
+仅仅创建了 `InActiveIssueSpecification` 的一个新实例，并使用其 `IsSatisfiedBy` 方法重新使用了规约定义的表达式。
+
+
+
+**在存储库中使用规约**
+
+首先，从存储库接口开始：
+
+```c#
+public interface IIssueRepository : IRepository<Issue, Guid>
+{
+	Task<List<Issue>> GetIssuesAsync(ISpecification<Issue> spec);
+}
+```
+
+通过获取规约对象，将 `GetInActiveIssuesAsync` 重命名为简单的 `GetIssuesAsync`。由于**规约（过滤器）已移出存储库**，我们不再需要创建不同的方法来获取具有不同条件的问题（例如 `GetAssignedIssues(...)`、`GetLockedIssues(...)` 等）
+
+
+
+更新后的存储库的实现如下：
+
+```c#
+public class EfCoreIssueRepository :
+    EfCoreRepository<IssueTrackingDbContext, Issue, Guid>,
+    IIssueRepository
+{
+    public EfCoreIssueRepository(
+        IDbContextProvider<IssueTrackingDbContext> dbContextProvider)
+        : base(dbContextProvider)
+    {
+    }
+
+    public async Task<List<Issue>> GetIssuesAsync(ISpecification<Issue> spec)
+    {
+        var dbSet = await GetDbSetAsync();
+        return await dbSet
+            .Where(spec.ToExpression())
+            .ToListAsync();
+    }
+}
+```
+
+由于 `ToExpression()` 方法返回一个表达式，因此可以直接传递给 `Where` 方法来过滤实体。
+
+最后，我们可以将任何规约实例传递给 `GetIssuesAsync` 方法：
+
+```c#
+public class IssueAppService : ApplicationService, IIssueAppService
+{
+    private readonly IIssueRepository _issueRepository;
+
+    public IssueAppService(IIssueRepository issueRepository)
+    {
+        _issueRepository = issueRepository;
+    }
+
+    public async Task DoItAsync()
+    {
+        var issues = await _issueRepository.GetIssuesAsync(
+            new InActiveIssueSpecification()
+        );
+    }
+}
+```
+
+
+
+**使用默认存储库**
+
+实际上，您不必创建自定义存储库即可使用规约。标准的 `IRepository` 已经扩展了 `IQueryable`，所以你可以在它上面使用标准的 LINQ 扩展方法：
+
+```c#
+public class IssueAppService : ApplicationService, IIssueAppService
+{
+    private readonly IRepository<Issue, Guid> _issueRepository;
+
+    public IssueAppService(IRepository<Issue, Guid> issueRepository)
+    {
+        _issueRepository = issueRepository;
+    }
+
+    public async Task DoItAsync()
+    {
+        var queryable = await _issueRepository.GetQueryableAsync();
+        var issues = AsyncExecuter.ToListAsync(
+            queryable.Where(new InActiveIssueSpecification())
+        );
+    }
+}
+```
+
+`AsyncExecuter` 是 ABP 框架提供的实用程序，用于在不依赖于 EF Core NuGet 包的情况下使用异步 LINQ 扩展方法（如此处的 `ToListAsync`）。有关更多信息，请参阅[存储库文档](https://docs.abp.io/en/abp/latest/Repositories)。
+
+
+
+**组合规约**
+
+规约的一个强大方面是它们是可组合的。假设我们有另一个规范，仅当`Issue`在里程碑中时才返回 `true`：
+
+```c#
+public class MilestoneSpecification : Specification<Issue>
+{
+    public Guid MilestoneId { get; }
+
+    public MilestoneSpecification(Guid milestoneId)
+    {
+        MilestoneId = milestoneId;
+    }
+
+    public override Expression<Func<Issue, bool>> ToExpression()
+    {
+        return i => i.MilestoneId == MilestoneId;
+    }
+}
+```
+
+该规约是有参数的，这与 `InActiveIssueSpecification` 有所不同。我们可以组合这两个规约来获取特定里程碑中的非活动问题列表：
+
+```c#
+public class IssueAppService : ApplicationService, IIssueAppService
+{
+    private readonly IRepository<Issue, Guid> _issueRepository;
+
+    public IssueAppService(IRepository<Issue, Guid> issueRepository)
+    {
+        _issueRepository = issueRepository;
+    }
+
+    public async Task DoItAsync(Guid milestoneId)
+    {
+        var queryable = await _issueRepository.GetQueryableAsync();
+        var issues = AsyncExecuter.ToListAsync(
+            queryable
+                .Where(
+                    new InActiveIssueSpecification()
+                        .And(new MilestoneSpecification(milestoneId))
+                        .ToExpression()
+                )
+        );
+    }
+}
+```
+
+上面的示例使用 `And` 扩展方法来组合规约。还有更多的组合方法可用，例如 `Or(...)` 和 `AndNot(...)`。
+
+
+
+::: tip
+有关 ABP 框架提供的规约基础结构的更多详细信息，请参阅[规约文档]()。
+:::
+
+
+
+## 领域服务
+
+//TODO

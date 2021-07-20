@@ -16,6 +16,15 @@ module.exports = {
     nextLinks: true,// 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
     prevLinks: true,// 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
     subSidebar: 'auto',//在所有页面中启用自动生成子侧边栏，原 sidebar 仍然兼容
+    /**
+     * support for
+     * 'default'
+     * 'funky'
+     * 'okaidia'
+     * 'solarizedlight'
+     * 'tomorrow'
+     */
+    codeTheme: 'solarizedlight', // default 'tomorrow'
     nav: [
       { text: 'Home', link: '/', icon: 'reco-home' },
       { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
@@ -39,10 +48,10 @@ module.exports = {
         ['./01_Introduction', '引言'],
         ['./02_What_Is_DDD', 'DDD是什么'],
         ['./03_Implementation_The_Big_Picture', '实现：全景图'],
-        ['./04_Implementation_The_Building_Blocks','实现：构建块'],
-        ['./05_Example_User_Cases','用例'],
-        ['./06_Domain_Logic_Application_Logic','领域逻辑与应用逻辑'],
-        ['./07_Reference_Books','引用书籍']
+        ['./04_Implementation_The_Building_Blocks', '实现：构建块'],
+        ['./05_Example_User_Cases', '用例'],
+        ['./06_Domain_Logic_Application_Logic', '领域逻辑与应用逻辑'],
+        ['./07_Reference_Books', '引用书籍']
       ],
       //Multiple Sidebars
       '/bar/': [
