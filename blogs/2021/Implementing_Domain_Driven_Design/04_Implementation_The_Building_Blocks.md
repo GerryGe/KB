@@ -352,7 +352,7 @@ ABP 的[异常处理系统](https://docs.abp.io/en/abp/latest/Exception-Handling
 
 **示例：业务规则：不能同时为用户分配超过 3 个未解决的问题**
 
-```c#
+```csharp
 public class Issue : AggregateRoot<Guid>
 {
     //...
@@ -413,7 +413,7 @@ public class Issue : AggregateRoot<Guid>
 
 **示例：从存储库中获取非活动问题**
 
-```c#
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -430,7 +430,7 @@ namespace IssueTracking.Issues
 
 `IIssueRepository` 通过添加 `GetInActiveIssuesAsync` 方法扩展了标准 `IRepository<...>` 接口。这个存储库与下面这样一个问题类一起工作：
 
-```c#
+```csharp
 public class Issue : AggregateRoot<Guid>, IHasCreationTime
 {
     public bool IsClosed { get; private set; }
@@ -447,7 +447,7 @@ public class Issue : AggregateRoot<Guid>, IHasCreationTime
 
 让我们看一下实现来理解它：
 
-```c#
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -503,7 +503,7 @@ namespace IssueTracking.Issues
 
 让我们看看实现：
 
-```c#
+```csharp
 public class Issue : AggregateRoot<Guid>, IHasCreationTime
 {
     public bool IsClosed { get; private set; }
@@ -543,7 +543,7 @@ public class Issue : AggregateRoot<Guid>, IHasCreationTime
 
 ABP 框架提供了必要的基础设施来轻松创建规约类并在您的应用程序代码中使用它们。让我们将非活动问题过滤器实现为规约类：
 
-```c#
+```csharp
 using System;
 using System.Linq.Expressions;
 using Volo.Abp.Specifications;
@@ -582,7 +582,7 @@ namespace IssueTracking.Issues
 
 规约类提供了一个 `IsSatisfiedBy` 方法，如果给定的对象（实体）满足规约，则该方法返回 `true`。
 
-```c#
+```csharp
 public class Issue : AggregateRoot<Guid>, IHasCreationTime
 {
     public bool IsClosed { get; private set; }
@@ -606,7 +606,7 @@ public class Issue : AggregateRoot<Guid>, IHasCreationTime
 
 首先，从存储库接口开始：
 
-```c#
+```csharp
 public interface IIssueRepository : IRepository<Issue, Guid>
 {
 	Task<List<Issue>> GetIssuesAsync(ISpecification<Issue> spec);
@@ -619,7 +619,7 @@ public interface IIssueRepository : IRepository<Issue, Guid>
 
 更新后的存储库的实现如下：
 
-```c#
+```csharp
 public class EfCoreIssueRepository :
     EfCoreRepository<IssueTrackingDbContext, Issue, Guid>,
     IIssueRepository
@@ -644,7 +644,7 @@ public class EfCoreIssueRepository :
 
 最后，我们可以将任何规约实例传递给 `GetIssuesAsync` 方法：
 
-```c#
+```csharp
 public class IssueAppService : ApplicationService, IIssueAppService
 {
     private readonly IIssueRepository _issueRepository;
@@ -669,7 +669,7 @@ public class IssueAppService : ApplicationService, IIssueAppService
 
 实际上，您不必创建自定义存储库即可使用规约。标准的 `IRepository` 已经扩展了 `IQueryable`，所以你可以在它上面使用标准的 LINQ 扩展方法：
 
-```c#
+```csharp
 public class IssueAppService : ApplicationService, IIssueAppService
 {
     private readonly IRepository<Issue, Guid> _issueRepository;
@@ -697,7 +697,7 @@ public class IssueAppService : ApplicationService, IIssueAppService
 
 规约的一个强大方面是它们是可组合的。假设我们有另一个规范，仅当`Issue`在里程碑中时才返回 `true`：
 
-```c#
+```csharp
 public class MilestoneSpecification : Specification<Issue>
 {
     public Guid MilestoneId { get; }
@@ -716,7 +716,7 @@ public class MilestoneSpecification : Specification<Issue>
 
 该规约是有参数的，这与 `InActiveIssueSpecification` 有所不同。我们可以组合这两个规约来获取特定里程碑中的非活动问题列表：
 
-```c#
+```csharp
 public class IssueAppService : ApplicationService, IIssueAppService
 {
     private readonly IRepository<Issue, Guid> _issueRepository;

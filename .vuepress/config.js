@@ -24,7 +24,7 @@ module.exports = {
      * 'solarizedlight'
      * 'tomorrow'
      */
-    codeTheme: 'solarizedlight', // default 'tomorrow'
+    codeTheme: 'tomorrow', // default 'tomorrow'
     nav: [
       { text: 'Home', link: '/', icon: 'reco-home' },
       { text: 'Time Line', link: '/timeline/', icon: 'reco-date' },
